@@ -5,6 +5,8 @@
  * @author (Haidi Sayed) 
  * @version (15/12/2024)
  */
+import edu.duke.*;
+import java.io.File;
 public class prt2{
 
     public String findAGene (String dna, String startCodon, int start){
@@ -37,8 +39,9 @@ public class prt2{
         return seq;
     }
     
-    public void findAllGenes (String dna, String StartCodon){
+    public StorageResource findAllGenes (String dna, String StartCodon){
         String geneSeq = "";
+        StorageResource geneList = new StorageResource();
         int startIndex = 0;
         
         while (true){
@@ -47,12 +50,13 @@ public class prt2{
             if( geneSeq.isEmpty()){
                 break;
             }else{
-                System.out.println("Gene is " + geneSeq);
+                
+                geneList.add(geneSeq);
                 startIndex = dna.indexOf(geneSeq,startIndex) + geneSeq.length();
             }
         }
         
-        
+        return geneList;
     }
     
     public int findStopCodon(String dna , String stopCodon, int startIndx){
@@ -104,5 +108,20 @@ public class prt2{
         
         
     
+    }
+    
+    public void testGenericFindAllGenes(){
+        // all good dna ex1
+        String dna = "acatggtatcgttccaatgggagtaacaacaatccgcgatgacgttgcgcgtcaacgttacgttaatgttggaattgctttaacagccccacatagatagaga";
+        String startCode ="atg";
+        //String stopCode = "taa";
+        System.out.println("DNA seqence is " + dna);
+        //System.out.println("Gene seqence is ");
+        StorageResource genes = new StorageResource();
+        genes =findAllGenes(dna,startCode);
+        for (String s : genes.data()){
+            System.out.println("Gene is " + s);
+        }
+        
     }
 }
