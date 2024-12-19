@@ -4,4 +4,6 @@ comment1.params=
 comment1.target=void\ doSave()
 comment2.params=inImage
 comment2.target=edu.duke.ImageResource\ Convert2Gray(edu.duke.ImageResource)
-numComments=3
+comment3.params=inImage
+comment3.target=edu.duke.ImageResource\ imageInverter(edu.duke.ImageResource)
+numComments=4

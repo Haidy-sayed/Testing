@@ -15,13 +15,20 @@ public class imageSaver
         
         for( File f : dr.selectedFiles()){
             ImageResource img = new ImageResource(f);
+            ImageResource grayimg = new ImageResource(f);
+            ImageResource Invertimg = new ImageResource(f);
             String fName = img.getFileName();
             String newName = "gray-"+fName;
             img.draw();
-            img = Convert2Gray(img);
-            img.setFileName(newName);
-            img.save();
-            img.draw();
+            grayimg = Convert2Gray(img);
+            grayimg.setFileName(newName);
+            grayimg.save();
+            grayimg.draw();
+            
+            Invertimg = imageInverter(img);
+            Invertimg.setFileName("Inverted-"+fName);
+            Invertimg.save();
+            Invertimg.draw();
         
         }
         
@@ -40,5 +47,28 @@ public class imageSaver
             pixel.setGreen(Avg);
         }
         return outImage;
+    }
+    
+    public ImageResource imageInverter(ImageResource inImage){
+    ImageResource outImage = new ImageResource(inImage.getWidth(), inImage.getHeight());
+    for(Pixel pix : outImage.pixels()){
+        Pixel inPix = inImage.getPixel(pix.getX(), pix.getY());
+        // calculating the inverted pixel value for red and setting the value for the new image
+        int tempInvert = 255 - (inPix.getRed()) ;
+        pix.setRed(tempInvert);
+        
+        // calculating the inverted pixel value for blue and setting the value for the new image
+
+        tempInvert = 255 - (inPix.getBlue()) ;
+        pix.setBlue(tempInvert);
+        
+        // calculating the inverted pixel value for green and setting the value for the new image
+
+        tempInvert = 255 - (inPix.getGreen()) ;
+        pix.setGreen(tempInvert);
+        
+    }
+    
+    return outImage;
     }
 }
