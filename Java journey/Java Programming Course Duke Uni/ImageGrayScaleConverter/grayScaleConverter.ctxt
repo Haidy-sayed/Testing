@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=grayScaleConverter
+comment1.params=inImage
+comment1.target=edu.duke.ImageResource\ Convert2Gray(edu.duke.ImageResource)
+comment2.params=
+comment2.target=void\ selectAndConvert()
+comment2.text=public\ void\ test(){\r\n\ \ \ \ \ \ \ \ //Reading\ an\ RGB\ image\r\n\ \ \ \ \ \ \ \ ImageResource\ ir\ \=\ new\ ImageResource();\r\n\ \ \ \ \ \ \ \ //\ creating\ a\ gray-scale\ version\ of\ the\ read\ RGB\ image\ through\ calling\ the\ Convert2Gray\ function\r\n\ \ \ \ \ \ \ \ ImageResource\ grayImage\ \=\ Convert2Gray(ir);\r\n\ \ \ \ \ \ \ \ grayImage.draw();\r\n}
+numComments=3
