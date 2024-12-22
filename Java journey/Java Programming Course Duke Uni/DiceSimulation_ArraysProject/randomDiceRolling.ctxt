@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=randomDiceRolling
+comment1.params=numRoll
+comment1.target=void\ randomDiceRoll(int)
+numComments=2
