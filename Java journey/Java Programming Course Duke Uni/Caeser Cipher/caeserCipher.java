@@ -8,7 +8,7 @@
 
 import java.io.*; 
 
-public class caeserCipherProject
+public class caeserCipher
 {
     public String caeserCipherEncryption(String inputmessage , int key){
         // the String message is the receieved message we want to encrypt , and the integer key is the encryption key
@@ -17,7 +17,7 @@ public class caeserCipherProject
         StringBuilder encryptedMessage = new StringBuilder(inputmessage);
         //Compute the shipted alphabet with the given key
         String shiftedAlphabet = alphabet.substring(key) + alphabet.substring(0,key);
-        //System.out.println(" encrypted Alphabet is " +shiftedAlphabet);
+        System.out.println(" encrypted Alphabet is " +shiftedAlphabet);
         // For loop to look through the charachters and encrypt them
         for( int i =0; i <encryptedMessage.length() ; i++){
             //getting the charchters one at a time and storing them in the character variable currChar
@@ -74,22 +74,21 @@ public class caeserCipherProject
     }
     
     public void tester(){
-        String message = "At noon be in the conference room with your hat on for a surprise party. YELL LOUD!";
+        String message = "I am so excited to be divorced because i was pissed and disappointed my entire marriage period";
         System.out.println("Original Message is " + message);
         int key = 15;
-        String Encmessage = caeserCipherEncryption(message , 15);
+        String Encmessage = caeserCipherEncryption(message , key);
         System.out.println("Encrypted Message is " + Encmessage);
         //key = 26-15;
         
-        String Decmessage = caeserCipherEncryption(Encmessage , 11);
+        String Decmessage = caeserCipherEncryption(Encmessage , 26-key);
         System.out.println("Decrypted Message is " + Decmessage);
         
-        System.out.println("Original Message is " + message);
-
-        Encmessage = caeserCipherEncryptionWith2Keys(message , 15 , 17 );
+        int key2 = 11;
+        Encmessage = caeserCipherEncryptionWith2Keys(message , key , key2 );
         System.out.println("Encrypted Message with 2 keys is " + Encmessage);
         
-        Decmessage = caeserCipherEncryptionWith2Keys(Encmessage , 11 , 9 );
+        Decmessage = caeserCipherEncryptionWith2Keys(Encmessage , 26-key , 26-key2 );
         System.out.println("Deccrypted Message with 2 keys is " + Decmessage);
         
         
