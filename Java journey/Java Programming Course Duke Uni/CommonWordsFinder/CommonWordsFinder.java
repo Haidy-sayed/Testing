@@ -62,8 +62,6 @@ public class CommonWordsFinder
         for(int k=0; k < common.length; k++){
             System.out.println(common[k] + "\t" + counter[k]);
         }
-           
-            
-    
+
     }
 }

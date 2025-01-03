@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=breakingTheCaeserCipher2Keys
+comment1.params=encryptedMessage
+comment1.target=java.lang.String\ cipher2KeysBreaker(java.lang.String)
+comment2.params=EvenLetters\ OddLetters
+comment2.target=java.lang.String\ unitString(java.lang.String,\ java.lang.String)
+comment3.params=
+comment3.target=void\ testBreak2keys()
+numComments=4

@@ -9,14 +9,24 @@
 import java.io.*; 
 
 public class caeserCipher
-{
-    public String caeserCipherEncryption(String inputmessage , int key){
+{   
+    private String alphabet;
+    private String shiftedAlphabet;
+    private int decryptKey;
+    
+    public caeserCipher(int key){
+        
+        alphabet ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        shiftedAlphabet = alphabet.substring(key) + alphabet.substring(0,key);
+    
+    }
+    
+    public String encrypt(String inputmessage){
         // the String message is the receieved message we want to encrypt , and the integer key is the encryption key
         
-        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder encryptedMessage = new StringBuilder(inputmessage);
         //Compute the shipted alphabet with the given key
-        String shiftedAlphabet = alphabet.substring(key) + alphabet.substring(0,key);
+        
         System.out.println(" encrypted Alphabet is " +shiftedAlphabet);
         // For loop to look through the charachters and encrypt them
         for( int i =0; i <encryptedMessage.length() ; i++){
@@ -38,60 +48,59 @@ public class caeserCipher
         return encryptedMessage.toString();
     }
     
-    public String caeserCipherEncryptionWith2Keys(String inputmessage , int key1, int key2){
-        // the String message is the receieved message we want to encrypt , and the integer key is the encryption key
+    public String decrypt(String Encrypted){
         
-        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        StringBuilder encryptedMessage = new StringBuilder(inputmessage);
-        //Compute the shipted alphabet with the given key1
-        String shiftedAlphabetKey1 = alphabet.substring(key1) + alphabet.substring(0,key1);
-        //Compute the shipted alphabet with the given key1
-        String shiftedAlphabetKey2 = alphabet.substring(key2) + alphabet.substring(0,key2);
-        //System.out.println(" encrypted Alphabet is " +shiftedAlphabet);
-        // For loop to look through the charachters and encrypt them
-        for( int i =0; i <encryptedMessage.length() ; i++){
-            //getting the charchters one at a time and storing them in the character variable currChar
-            char currChar = encryptedMessage.charAt(i);
-            //converting any lower case to upper case because my reference is uppercase
-            currChar= Character.toUpperCase(currChar);
-            // getting the index of the charachter from the normal alphabet 
-            int idx = alphabet.indexOf(currChar);
-            char newChar;
-            if( idx != -1){
-                // getting the shifted character and storing it in the currChar
-                if( (i % 2) == 0){
-                    newChar = shiftedAlphabetKey1.charAt(idx);  
-                    encryptedMessage.setCharAt(i, newChar);
-                }else {
-                    newChar = shiftedAlphabetKey2.charAt(idx);  
-                    encryptedMessage.setCharAt(i, newChar);  
-                }
-            }
-            // Do nothing if the character was not found, in that case it's going to be specialCharacter  
+        
+        // initiating an ineteger array to store the occurances of each letter from the given encrypted message
+        int[] lettersOccurances = countLetters(Encrypted);
+        // finding the most occuring letter's indx
+        int maxIdx = maxIndex(lettersOccurances);
+        //subtracting the position in the alphabet from the eth position that is the 4th as e is the most occuring letter of the English language
+        int deckey = 0;
+        if ( maxIdx <= 4 ) {
+            deckey = 4-maxIdx;
+        }else{
+            deckey = 26 - (maxIdx -4);
         }
-        // converting the StringBuilder type EncryptedMessage to String to return it        
-        return encryptedMessage.toString();
+        
+        decryptKey = deckey;
+        // making an instance of the caeseCipherClass
+        caeserCipher cc = new caeserCipher(decryptKey);
+        
+        //System.out.println("key is " + deckey);
+        
+        return cc.encrypt(Encrypted);
     }
     
-    public void tester(){
-        String message = "I am so excited to be divorced because i was pissed and disappointed my entire marriage period";
-        System.out.println("Original Message is " + message);
-        int key = 15;
-        String Encmessage = caeserCipherEncryption(message , key);
-        System.out.println("Encrypted Message is " + Encmessage);
-        //key = 26-15;
+    private int[] countLetters(String EncryptedMessage){
+        String Alphabet = "abcdefghijklmnopqrstuvwxyz";
+        int[] count = new int[26];
+
+        for(int i = 0; i< EncryptedMessage.length() ; i++){
+            char letter = Character.toLowerCase(EncryptedMessage.charAt(i));
+            int idx = Alphabet.indexOf(letter);
+            if(idx != -1){
+                count[idx] +=1;
+                
+            }
+            
+        }
         
-        String Decmessage = caeserCipherEncryption(Encmessage , 26-key);
-        System.out.println("Decrypted Message is " + Decmessage);
-        
-        int key2 = 11;
-        Encmessage = caeserCipherEncryptionWith2Keys(message , key , key2 );
-        System.out.println("Encrypted Message with 2 keys is " + Encmessage);
-        
-        Decmessage = caeserCipherEncryptionWith2Keys(Encmessage , 26-key , 26-key2 );
-        System.out.println("Deccrypted Message with 2 keys is " + Decmessage);
-        
-        
+        return count;
     }
+    
+    private int maxIndex( int[] occurances){
+        int max = 1; 
+        
+        for(int k =1; k< occurances.length ; k++){
+            if( occurances[max] < occurances[k]){
+                max = k;
+            }
+        } 
+        //System.out.println("max idx is " + max);
+        
+        return max;
+    }
+    
 }
 

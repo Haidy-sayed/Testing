@@ -10,11 +10,11 @@ import java.io.*;
 import edu.duke.*; 
 
 public class breakingTheCaeserCipher
-{
+{   
+    
     public String breakCaeserCipher(String Encrypted){
         
-        // making an instance of the caeseCipherClass
-        caeserCipher cc = new caeserCipher();
+        
         // initiating an ineteger array to store the occurances of each letter from the given encrypted message
         int[] lettersOccurances = countLetters(Encrypted);
         // finding the most occuring letter's indx
@@ -26,15 +26,16 @@ public class breakingTheCaeserCipher
         }else{
             deckey = 26 - (maxIdx -4);
         }
-        
+        // making an instance of the caeseCipherClass
+        caeserCipher cc = new caeserCipher(deckey);
         System.out.println("key is " + deckey);
         
-        return cc.caeserCipherEncryption(Encrypted , deckey);
+        return cc.encrypt(Encrypted);
     }
     
     
     
-    public int maxIndex( int[] occurances){
+    private int maxIndex( int[] occurances){
         int max = 1; 
         
         for(int k =1; k< occurances.length ; k++){
@@ -64,12 +65,12 @@ public class breakingTheCaeserCipher
         return count;
     }
     
-    public void test(){
+    /*public void test(){
         FileResource fr = new FileResource();
         String EncryptedMessage = fr.asString();
         
         String dec = breakCaeserCipher(EncryptedMessage);
         System.out.println("Encryptes \t : \t " + EncryptedMessage + "\t" + "Decrypted \t : \t" + dec);
-    }
+    }*/
     
 }
